@@ -161,7 +161,10 @@ export async function POST(request: NextRequest) {
         })
 
       } catch (error) {
-        console.error(`Erreur lors de l'upload de ${file.name}:`, error)
+        console.error(`Erreur lors de l'upload de ${file.name}:`, {
+          message: error instanceof Error ? error.message : 'Erreur inconnue',
+          stack: error instanceof Error ? error.stack : undefined
+        })
         // Continuer avec les autres fichiers
       }
     }
